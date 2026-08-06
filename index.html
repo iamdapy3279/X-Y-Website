@@ -1,303 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta name="description" content="X&Y - A bakehouse & bistro in the heart of Kolkata. Sourdough, artisanal coffee, and slow dining.">
   <title>X&Y | Bakehouse & Bistro Kolkata</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <style data-purpose="custom-fonts-and-colors">
+    :root {
+      --terracotta: #A54A33;
+      --cream: #F4EFE6;
+      --dark-brown: #5A3521;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--terracotta);
+      background-color: var(--cream);
+    }
+    h1, h2, h3, h4, h5, h6, .serif-font {
+      font-family: 'Playfair Display', serif;
+    }
+    .bg-terracotta { background-color: var(--terracotta); }
+    .text-terracotta { color: var(--terracotta); }
+    .bg-cream { background-color: var(--cream); }
+    .text-cream { color: var(--cream); }
+    .text-dark-brown { color: var(--dark-brown); }
+    
+    .outline-text {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--cream);
+    }
+    
+    .hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+  </style>
+
+  <script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            terracotta: '#A54A33',
+            cream: '#F4EFE6',
+            darkBrown: '#5A3521',
+          },
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="antialiased font-sans text-terracotta bg-cream">
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="navbar-brand">
-        <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="navbar-logo">
-        <span class="navbar-title">X&Y</span>
-      </a>
-      
-      <button class="hamburger" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  <!-- BEGIN: Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-5 text-cream text-xs font-bold tracking-widest uppercase bg-terracotta/95 backdrop-blur-md shadow-md" data-purpose="main-navigation">
+    <a class="hover:opacity-80 transition-opacity" href="Menu.pdf" target="_blank">Menu PDF</a>
+    
+    <a class="flex items-center gap-2 text-2xl font-serif tracking-wide hover:opacity-90 transition-opacity lowercase" href="index.html">
+      <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="h-8 w-auto filter brightness-0 invert">
+      <span>x&amp;y</span>
+    </a>
 
-      <ul class="nav-links">
-        <li><a href="index.html" class="nav-link active">Home</a></li>
-        <li><a href="#outlets" class="nav-link">Outlets</a></li>
-        <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
-        <li><a href="#dishes" class="nav-link">Signature Dishes</a></li>
-        <li><a href="about.html" class="nav-link">About Us</a></li>
-        <li><a href="locations.html" class="nav-link">Locations</a></li>
-        <li><a href="Menu.pdf" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">View Menu</a></li>
-      </ul>
+    <div class="flex items-center space-x-6">
+      <a class="hover:opacity-80 transition-opacity hidden md:inline" href="about.html">About Us</a>
+      <a class="hover:opacity-80 transition-opacity hidden md:inline" href="locations.html">Locations</a>
+      <a class="border border-cream px-4 py-2 rounded-full hover:bg-cream hover:text-terracotta transition-colors" href="#outlets">Outlets</a>
     </div>
   </nav>
+  <!-- END: Navigation -->
 
-  <!-- Section 1 : Welcome Screen (Hero Video) -->
-  <section class="hero-section">
-    <div class="hero-video-container">
-      <img src="assets/images/WhatsApp Image 2026-07-30 at 19.12.30.jpeg" alt="X&Y Bistro Cover" class="hero-poster" id="heroPoster">
-      <video id="heroVideo" autoplay muted loop playsinline class="hero-video">
-        <source src="assets/videos/Dsktop2.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-      </video>
+  <!-- BEGIN: Hero Section -->
+  <section class="relative bg-terracotta text-cream min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-4 overflow-hidden" data-purpose="hero-section">
+    
+    <!-- Hero Video Background -->
+    <video autoplay muted loop playsinline class="hero-video-bg">
+      <source src="assets/videos/Dsktop2.mp4" type="video/mp4">
+    </video>
+    
+    <div class="absolute w-full top-28 flex justify-between px-8 text-xs font-bold tracking-widest uppercase z-10 opacity-90">
+      <span>Open Daily from 8am</span>
+      <span>Kolkata • Alipore • Salt Lake • Elgin</span>
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="badge-tag">Bakehouse & Bistro</span>
-      <h1 class="hero-title">Where every table is yours</h1>
-      <p class="hero-subtext">Made for mornings, lingering lunches, and slow evenings in the heart of Kolkata.</p>
-      <div class="hero-buttons">
-        <a href="Menu.pdf" target="_blank" class="btn btn-primary"><i class="fa-solid fa-utensils"></i> View Menu</a>
-        <a href="#outlets" class="btn btn-outline"><i class="fa-solid fa-location-dot"></i> Find Us</a>
+
+    <div class="relative z-20 flex flex-col items-center max-w-4xl w-full text-center mt-12">
+      
+      <!-- Circular Spinning SVG Badge -->
+      <div class="relative w-64 h-64 mb-10">
+        <svg class="absolute w-full h-full animate-[spin_25s_linear_infinite]" viewBox="0 0 100 100">
+          <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" id="curve"></path>
+          <text class="text-[7.5px] uppercase tracking-widest font-bold fill-cream">
+            <textPath href="#curve">Where every table is yours • X&Y Bakehouse & Bistro •</textPath>
+          </text>
+        </svg>
+        
+        <div class="absolute inset-0 flex items-center justify-center">
+          <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="h-20 w-auto filter brightness-0 invert">
+        </div>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4 leading-tight">Where every table is yours</h1>
+      <p class="text-sm md:text-base max-w-xl mx-auto mb-8 opacity-90">A bakehouse &amp; bistro in the heart of Kolkata — made for mornings, lingering lunches, and slow evenings.</p>
+      
+      <div class="flex space-x-4 mb-12">
+        <a href="Menu.pdf" target="_blank" class="bg-cream text-terracotta px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white transition-all shadow-lg">View Menu</a>
+        <a href="#outlets" class="border-2 border-cream text-cream px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-cream hover:text-terracotta transition-all">Find Outlets</a>
+      </div>
+
+      <div class="relative w-full aspect-[21/9] bg-gray-200 overflow-hidden shadow-2xl rounded-2xl border-4 border-white/20">
+        <img alt="X&Y Bistro Atmosphere" class="w-full h-full object-cover" src="assets/images/WhatsApp Image 2026-07-30 at 19.12.30.jpeg">
       </div>
     </div>
   </section>
+  <!-- END: Hero Section -->
 
-  <!-- Section 2 : Outlets at a Glance -->
-  <section id="outlets" class="section-padding outlets-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge-tag">Our Outlets</span>
-        <h2>Outlets at a Glance</h2>
-        <p>Three unique locations across Kolkata, crafting fresh experiences every day.</p>
+  <!-- BEGIN: Intro Section -->
+  <section class="py-24 px-4 text-center max-w-3xl mx-auto" data-purpose="intro-section">
+    <div class="w-32 h-32 mx-auto mb-8 relative">
+      <svg class="absolute w-full h-full" viewBox="0 0 100 100">
+        <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" id="curve-intro"></path>
+        <text class="text-[10px] uppercase tracking-widest font-bold fill-terracotta">
+          <textPath href="#curve-intro">Slow Living &amp; Fresh Bakes</textPath>
+        </text>
+      </svg>
+    </div>
+    <h2 class="text-2xl md:text-4xl font-serif font-bold leading-tight mb-8">X&Y is for laidback brekkies, catch-ups with friends, takeaway goodies, &amp; days that you never want to end.</h2>
+    <a class="inline-block border-2 border-terracotta text-xs font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-terracotta hover:text-cream transition-colors" href="about.html">Our Story</a>
+  </section>
+  <!-- END: Intro Section -->
+
+  <!-- BEGIN: Outlets Section -->
+  <section id="outlets" class="bg-[#F8F5EF] py-24 px-8" data-purpose="outlets-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold uppercase tracking-widest text-terracotta">Locations</span>
+        <h2 class="text-3xl md:text-5xl font-serif font-bold mt-2">Outlets at a Glance</h2>
       </div>
 
-      <div class="outlets-grid">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Outlet 1: Alipore -->
-        <div class="outlet-card">
+        <div class="bg-cream p-8 rounded-2xl border-2 border-terracotta/20 shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow">
           <div>
-            <div class="outlet-header">
-              <h3 class="outlet-name">ALIPORE</h3>
-            </div>
-            <ul class="outlet-details">
-              <li><i class="fa-solid fa-phone"></i> +91 92309 85229</li>
-              <li><i class="fa-solid fa-clock"></i> 11 AM – 11 PM</li>
-              <li><i class="fa-solid fa-location-dot"></i> Ground Floor, 6, Burdwan Rd, Alipore, Kolkata, West Bengal 700027</li>
-            </ul>
+            <h3 class="text-2xl font-serif font-bold mb-4 text-terracotta">ALIPORE</h3>
+            <p class="text-sm mb-2"><strong>Phone:</strong> +91 92309 85229</p>
+            <p class="text-sm mb-2"><strong>Hours:</strong> 11 AM – 11 PM</p>
+            <p class="text-sm text-gray-700 leading-relaxed mb-6">Ground Floor, 6, Burdwan Rd, Alipore, Kolkata, West Bengal 700027</p>
           </div>
-          <a href="https://maps.google.com/?q=6+Burdwan+Rd+Alipore+Kolkata" target="_blank" class="btn btn-dark"><i class="fa-solid fa-compass"></i> Get Directions</a>
+          <a href="https://maps.google.com/?q=6+Burdwan+Rd+Alipore+Kolkata" target="_blank" class="inline-block text-center border-2 border-terracotta text-terracotta text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-terracotta hover:text-cream transition-colors">Get Directions →</a>
         </div>
 
         <!-- Outlet 2: Salt Lake -->
-        <div class="outlet-card">
+        <div class="bg-cream p-8 rounded-2xl border-2 border-terracotta/20 shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow">
           <div>
-            <div class="outlet-header">
-              <h3 class="outlet-name">SALT LAKE</h3>
-            </div>
-            <ul class="outlet-details">
-              <li><i class="fa-solid fa-phone"></i> +91 82409 68898</li>
-              <li><i class="fa-solid fa-clock"></i> 12 PM – 11:30 PM</li>
-              <li><i class="fa-solid fa-location-dot"></i> CG-220, Ground Floor, Sector 2, Salt Lake City, Kolkata – 700091</li>
-            </ul>
+            <h3 class="text-2xl font-serif font-bold mb-4 text-terracotta">SALT LAKE</h3>
+            <p class="text-sm mb-2"><strong>Phone:</strong> +91 82409 68898</p>
+            <p class="text-sm mb-2"><strong>Hours:</strong> 12 PM – 11:30 PM</p>
+            <p class="text-sm text-gray-700 leading-relaxed mb-6">CG-220, Ground Floor, Sector 2, Salt Lake City, Kolkata – 700091</p>
           </div>
-          <a href="https://maps.google.com/?q=CG-220+Sector+2+Salt+Lake+City+Kolkata" target="_blank" class="btn btn-dark"><i class="fa-solid fa-compass"></i> Get Directions</a>
+          <a href="https://maps.google.com/?q=CG-220+Sector+2+Salt+Lake+City+Kolkata" target="_blank" class="inline-block text-center border-2 border-terracotta text-terracotta text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-terracotta hover:text-cream transition-colors">Get Directions →</a>
         </div>
 
         <!-- Outlet 3: Elgin Road -->
-        <div class="outlet-card">
+        <div class="bg-cream p-8 rounded-2xl border-2 border-terracotta/20 shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow">
           <div>
-            <div class="outlet-header">
-              <h3 class="outlet-name">ELGIN ROAD</h3>
-            </div>
-            <ul class="outlet-details">
-              <li><i class="fa-solid fa-phone"></i> +91 82403 94550</li>
-              <li><i class="fa-solid fa-clock"></i> 8 AM – 10 PM</li>
-              <li><i class="fa-solid fa-location-dot"></i> 10E, Hungerford St, Elgin, Kolkata, West Bengal 700017</li>
-            </ul>
+            <h3 class="text-2xl font-serif font-bold mb-4 text-terracotta">ELGIN ROAD</h3>
+            <p class="text-sm mb-2"><strong>Phone:</strong> +91 82403 94550</p>
+            <p class="text-sm mb-2"><strong>Hours:</strong> 8 AM – 10 PM</p>
+            <p class="text-sm text-gray-700 leading-relaxed mb-6">10E, Hungerford St, Elgin, Kolkata, West Bengal 700017</p>
           </div>
-          <a href="https://maps.google.com/?q=10E+Hungerford+St+Elgin+Kolkata" target="_blank" class="btn btn-dark"><i class="fa-solid fa-compass"></i> Get Directions</a>
+          <a href="https://maps.google.com/?q=10E+Hungerford+St+Elgin+Kolkata" target="_blank" class="inline-block text-center border-2 border-terracotta text-terracotta text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-terracotta hover:text-cream transition-colors">Get Directions →</a>
         </div>
       </div>
     </div>
   </section>
+  <!-- END: Outlets Section -->
 
-  <!-- Section 3 : X&Y Intro / Philosophy -->
-  <section id="philosophy" class="section-padding">
-    <div class="container">
-      <div class="philosophy-container">
-        <div class="philosophy-image-wrap">
-          <img src="assets/images/WhatsApp Image 2026-07-30 at 19.12.29.jpeg" alt="X&Y Atmosphere">
+  <!-- BEGIN: Signature Dishes Section -->
+  <section class="py-24 px-8 max-w-7xl mx-auto" data-purpose="dishes-section">
+    <div class="text-center mb-16">
+      <span class="text-xs font-bold uppercase tracking-widest text-terracotta">Crafted Fresh Daily</span>
+      <h2 class="text-3xl md:text-5xl font-serif font-bold mt-2">Signature Dishes</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Dish 1 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-terracotta/10 hover:-translate-y-2 transition-transform">
+        <div class="aspect-[4/3] bg-gray-200 overflow-hidden">
+          <img src="assets/images/WhatsApp Image 2026-07-30 at 19.13.18.jpeg" alt="Eggs Benedict" class="w-full h-full object-cover">
         </div>
-        <div>
-          <span class="badge-tag">Our Ethos</span>
-          <h2>Our Philosophy</h2>
-          <p>At the heart of our restaurant is a deep love for authentic Italian cuisine and slow artisanal baking, crafted with passion, tradition, and the finest ingredients.</p>
-          
-          <div class="philosophy-cards">
-            <div class="philosophy-card">
-              <div class="philosophy-card-title"><span>X</span> YOU</div>
-              <p>Bring your hunger, your laptop, your stories. Your table is yours for as long as you need it.</p>
-            </div>
-            <div class="philosophy-card">
-              <div class="philosophy-card-title"><span>&</span> FOOD</div>
-              <p>Food is better when it's shared. Every dish tells a story, honoring culinary heritage with modern warmth.</p>
-            </div>
-            <div class="philosophy-card">
-              <div class="philosophy-card-title"><span>Y</span> US</div>
-              <p>We bake from scratch, every single day. 18-hour fermented sourdoughs and hand-laminated croissants.</p>
-            </div>
-          </div>
+        <div class="p-6 text-center">
+          <h3 class="font-serif font-bold text-xl mb-2 text-terracotta">EGGS BENEDICT</h3>
+          <p class="text-xs text-gray-600">Poached eggs, hollandaise, English muffin.</p>
+        </div>
+      </div>
+
+      <!-- Dish 2 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-terracotta/10 hover:-translate-y-2 transition-transform">
+        <div class="aspect-[4/3] bg-gray-200 overflow-hidden">
+          <img src="assets/images/Flat Plate 7_-2.png" alt="Burnt Chilli Oil Spaghetti" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="font-serif font-bold text-xl mb-2 text-terracotta">BURNT CHILLI OIL SPAGHETTI</h3>
+          <p class="text-xs text-gray-600">Spaghetti, Chilli Oil, Parmesan.</p>
+        </div>
+      </div>
+
+      <!-- Dish 3 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-terracotta/10 hover:-translate-y-2 transition-transform">
+        <div class="aspect-[4/3] bg-gray-200 overflow-hidden">
+          <img src="assets/images/WhatsApp Image 2026-07-30 at 19.12.31.jpeg" alt="New York Cheesecake" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="font-serif font-bold text-xl mb-2 text-terracotta">NEW YORK CHEESECAKE</h3>
+          <p class="text-xs text-gray-600">Cream Cheese, Graham Base, Vanilla.</p>
+        </div>
+      </div>
+
+      <!-- Dish 4 -->
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-terracotta/10 hover:-translate-y-2 transition-transform">
+        <div class="aspect-[4/3] bg-gray-200 overflow-hidden">
+          <img src="assets/images/Lightbox 2.png" alt="Butter Croissant" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-center">
+          <h3 class="font-serif font-bold text-xl mb-2 text-terracotta">BUTTER CROISSANT</h3>
+          <p class="text-xs text-gray-600">Butter, Flour, Salt.</p>
         </div>
       </div>
     </div>
   </section>
+  <!-- END: Signature Dishes Section -->
 
-  <!-- Section 4 : Signature Dishes -->
-  <section id="dishes" class="section-padding dishes-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge-tag">Crafted With Intent</span>
-        <h2>Signature Dishes</h2>
-        <p>A few highlights from our kitchen and bakery menu.</p>
-      </div>
-
-      <div class="dishes-grid">
-        <!-- Dish 1 -->
-        <div class="dish-card">
-          <div class="dish-img-wrap">
-            <img src="assets/images/WhatsApp Image 2026-07-30 at 19.13.18.jpeg" alt="Eggs Benedict">
+  <!-- BEGIN: Feature Sections -->
+  <section class="bg-[#F8F5EF] py-24 px-8" data-purpose="features">
+    <div class="max-w-6xl mx-auto space-y-32">
+      
+      <!-- Feature 1 -->
+      <div class="flex flex-col md:flex-row items-center gap-16">
+        <div class="flex-1 w-full relative">
+          <div class="relative w-[80%] aspect-square md:aspect-[4/5] bg-gray-200 mx-auto transform -rotate-3 z-10 border-4 border-white shadow-lg rounded-xl overflow-hidden">
+            <img alt="X&Y Bakehouse Interior" class="w-full h-full object-cover" src="assets/images/WhatsApp Image 2026-07-30 at 19.12.29.jpeg">
           </div>
-          <div class="dish-info">
-            <h3 class="dish-title">EGGS BENEDICT</h3>
-            <p class="dish-desc">Poached eggs, silky hollandaise sauce, baked English muffin.</p>
-          </div>
+          <div class="absolute inset-0 w-[80%] aspect-square md:aspect-[4/5] bg-terracotta/20 mx-auto transform rotate-2 z-0 border-4 border-white rounded-xl"></div>
         </div>
-
-        <!-- Dish 2 -->
-        <div class="dish-card">
-          <div class="dish-img-wrap">
-            <img src="assets/images/Flat Plate 7_-2.png" alt="Burnt Chilli Oil Spaghetti">
+        <div class="flex-1 text-center md:text-left">
+          <div class="w-16 h-16 mx-auto md:mx-0 mb-6 text-terracotta">
+            <img src="assets/logos/Final logo without background_edited.png" alt="X&Y" class="w-full h-auto">
           </div>
-          <div class="dish-info">
-            <h3 class="dish-title">BURNT CHILLI OIL SPAGHETTI</h3>
-            <p class="dish-desc">Handcrafted spaghetti, infused chilli oil, aged parmesan cheese.</p>
-          </div>
-        </div>
-
-        <!-- Dish 3 -->
-        <div class="dish-card">
-          <div class="dish-img-wrap">
-            <img src="assets/images/WhatsApp Image 2026-07-30 at 19.12.31.jpeg" alt="New York Cheesecake">
-          </div>
-          <div class="dish-info">
-            <h3 class="dish-title">NEW YORK CHEESECAKE</h3>
-            <p class="dish-desc">Rich cream cheese, buttery graham cracker crust, vanilla bean.</p>
-          </div>
-        </div>
-
-        <!-- Dish 4 -->
-        <div class="dish-card">
-          <div class="dish-img-wrap">
-            <img src="assets/images/Lightbox 2.png" alt="Butter Croissant">
-          </div>
-          <div class="dish-info">
-            <h3 class="dish-title">BUTTER CROISSANT</h3>
-            <p class="dish-desc">Golden flaky layers, French butter, sea salt, baked fresh daily.</p>
-          </div>
+          <p class="font-serif font-bold text-xl md:text-2xl max-w-md leading-relaxed">At the heart of X&Y is a deep love for authentic Italian cuisine &amp; artisanal sourdough, crafted with passion and tradition.</p>
         </div>
       </div>
+
+      <!-- Feature 2 -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-16">
+        <div class="flex-1 w-full relative">
+          <div class="relative w-[80%] aspect-square md:aspect-[4/5] bg-gray-200 mx-auto transform rotate-3 z-10 border-4 border-white shadow-lg rounded-xl overflow-hidden">
+            <img alt="X&Y Coffee & Pastries" class="w-full h-full object-cover" src="assets/images/Lightbox 3.png">
+          </div>
+          <div class="absolute inset-0 w-[80%] aspect-square md:aspect-[4/5] bg-terracotta/20 mx-auto transform -rotate-2 z-0 border-4 border-white rounded-xl"></div>
+        </div>
+        <div class="flex-1 text-center md:text-left flex flex-col items-center md:items-end">
+          <p class="font-serif font-bold text-xl md:text-2xl max-w-md text-center md:text-right leading-relaxed">You'll find us across Kolkata in Alipore, Salt Lake, and Elgin Road. Serving an all-day dining menu, baked treats, &amp; damn good coffee.</p>
+        </div>
+      </div>
+
     </div>
   </section>
+  <!-- END: Feature Sections -->
 
-  <!-- Section 5 : About Us Teaser -->
-  <section class="section-padding about-preview-section">
-    <div class="container">
-      <div class="about-preview-container">
-        <div class="about-preview-media">
-          <video autoplay muted loop playsinline>
-            <source src="assets/videos/Mobile2.mp4" type="video/mp4">
-            <img src="assets/images/WhatsApp Image 2026-07-30 at 19.13.20.jpeg" alt="Staff Working">
-          </video>
-        </div>
-        <div>
-          <span class="badge-tag" style="background: rgba(255,255,255,0.15); color: #fff;">Our Story</span>
-          <h2>Food made with intention. A place built with love.</h2>
-          <p style="margin: 1.5rem 0;">Founded by Vasudha Goenka, X&Y was built on a simple question: why isn't there a place in Kolkata that takes food and slow living this seriously? Every dish and room is rooted in that obsession.</p>
-          <a href="about.html" class="btn btn-primary">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+  <!-- BEGIN: Instagram Grid -->
+  <section class="py-24 px-8 text-center max-w-7xl mx-auto" data-purpose="instagram-section">
+    <h2 class="text-3xl font-serif font-bold mb-12 text-left">Moments at X&Y</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+      <div class="aspect-square bg-gray-200 rounded-md overflow-hidden">
+        <img alt="Instagram 1" class="w-full h-full object-cover" src="assets/images/WhatsApp Image 2026-07-30 at 19.12.30 (1).jpeg">
+      </div>
+      <div class="aspect-square bg-gray-200 rounded-md overflow-hidden">
+        <img alt="Instagram 2" class="w-full h-full object-cover" src="assets/images/Lightbox 3.png">
+      </div>
+      <div class="aspect-square bg-gray-200 rounded-md overflow-hidden">
+        <img alt="Instagram 3" class="w-full h-full object-cover" src="assets/images/WhatsApp Image 2026-07-30 at 19.13.21.jpeg">
+      </div>
+      <div class="aspect-square bg-gray-200 rounded-md overflow-hidden">
+        <img alt="Instagram 4" class="w-full h-full object-cover" src="assets/images/Lightbox 4.png">
+      </div>
+      <div class="aspect-square bg-gray-200 rounded-md overflow-hidden">
+        <img alt="Instagram 5" class="w-full h-full object-cover" src="assets/images/Side Plate 7_-2.png">
+      </div>
+      <div class="aspect-square bg-terracotta rounded-md overflow-hidden flex items-center justify-center p-4">
+        <svg class="w-full h-full animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100">
+          <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" id="curve-ig"></path>
+          <text class="text-[9.5px] uppercase tracking-widest font-bold fill-cream">
+            <textPath href="#curve-ig">Follow us on instagram @xandykolkata</textPath>
+          </text>
+        </svg>
       </div>
     </div>
+    <a class="inline-block border-2 border-terracotta text-xs font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-terracotta hover:text-cream transition-colors" href="https://instagram.com" target="_blank">Follow @xandykolkata</a>
   </section>
+  <!-- END: Instagram Grid -->
 
-  <!-- Section 6 : Instagram Feed -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="text-center">
-        <span class="badge-tag">@xandykolkata</span>
-        <h2>Moments at X&Y</h2>
-        <p>Follow our daily bakehouse stories on Instagram.</p>
-      </div>
-
-      <div class="insta-grid">
-        <div class="insta-item">
-          <img src="assets/images/WhatsApp Image 2026-07-30 at 19.12.30 (1).jpeg" alt="Insta 1">
-          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-        </div>
-        <div class="insta-item">
-          <img src="assets/images/Lightbox 3.png" alt="Insta 2">
-          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-        </div>
-        <div class="insta-item">
-          <img src="assets/images/WhatsApp Image 2026-07-30 at 19.13.21.jpeg" alt="Insta 3">
-          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-        </div>
-        <div class="insta-item">
-          <img src="assets/images/Lightbox 4.png" alt="Insta 4">
-          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo">
-          <p>X&Y Bakehouse & Bistro. Crafted with patience, passion, and fresh Kolkata spirit.</p>
-          <div class="footer-delivery-badges">
-            <img src="assets/logos/Zomato_Logo_0.svg" alt="Order on Zomato">
-            <img src="assets/logos/Swiggy_id8bItcgXR_1.svg" alt="Order on Swiggy">
-          </div>
-        </div>
+  <!-- BEGIN: Footer -->
+  <footer class="bg-terracotta text-cream py-24 px-8 relative overflow-hidden" data-purpose="footer">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center text-xs font-bold uppercase tracking-widest mb-16 relative z-10">
+      <div>
+        <h4 class="mb-4 text-sm font-serif">Outlets Contact</h4>
+        <p class="mb-2 opacity-80">Alipore: +91 92309 85229</p>
+        <p class="mb-2 opacity-80">Salt Lake: +91 82409 68898</p>
+        <p class="mb-4 opacity-80">Elgin Road: +91 82403 94550</p>
         
-        <div class="footer-column">
-          <h4>Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="Menu.pdf" target="_blank">Menu PDF</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4>Outlets</h4>
-          <ul class="footer-links">
-            <li>Alipore: +91 92309 85229</li>
-            <li>Salt Lake: +91 82409 68898</li>
-            <li>Elgin Road: +91 82403 94550</li>
-          </ul>
+        <div class="flex justify-center space-x-4 mt-4">
+          <img src="assets/logos/Zomato_Logo_0.svg" alt="Zomato" class="h-6 bg-white p-1 rounded">
+          <img src="assets/logos/Swiggy_id8bItcgXR_1.svg" alt="Swiggy" class="h-6 bg-white p-1 rounded">
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 X&Y Bakehouse & Bistro. All rights reserved.</p>
-        <p>Built with intention in Kolkata.</p>
+      <div>
+        <h4 class="mb-4 text-sm font-serif">Opening Hours</h4>
+        <p class="mb-1 opacity-80">Alipore: 11 AM – 11 PM</p>
+        <p class="mb-1 opacity-80">Salt Lake: 12 PM – 11:30 PM</p>
+        <p class="mb-4 opacity-80">Elgin Road: 8 AM – 10 PM</p>
       </div>
+
+      <div>
+        <h4 class="mb-4 text-sm font-serif">Navigation</h4>
+        <p class="mb-2"><a href="index.html" class="hover:underline">Home</a></p>
+        <p class="mb-2"><a href="about.html" class="hover:underline">About Us</a></p>
+        <p class="mb-2"><a href="locations.html" class="hover:underline">Locations</a></p>
+        <p class="mb-2"><a href="Menu.pdf" target="_blank" class="hover:underline">Menu PDF</a></p>
+      </div>
+    </div>
+
+    <div class="absolute bottom-6 w-full px-8 flex justify-between text-[10px] uppercase font-bold tracking-widest opacity-60">
+      <p>© 2026 X&amp;Y Bakehouse &amp; Bistro. All rights reserved.</p>
+      <p>Built with intention in Kolkata.</p>
     </div>
   </footer>
+  <!-- END: Footer -->
 
-  <!-- JavaScript -->
-  <script src="assets/js/main.js"></script>
 </body>
 </html>
