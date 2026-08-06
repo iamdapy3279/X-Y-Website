@@ -95,17 +95,17 @@
       
       <!-- Hero Content (Fades out on scroll) -->
       <div id="hero-content" class="relative z-20 flex flex-col items-center max-w-4xl w-full text-center text-cream transition-opacity duration-300 transform -translate-y-16">
-        <div class="relative w-64 h-64 mb-16">
-          <!-- Circular text placeholder -->
-          <svg class="absolute w-full h-full animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100">
-            <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" id="curve"></path>
-            <text class="text-[8px] uppercase tracking-widest font-bold fill-cream">
-              <textPath href="#curve">Where coffee meets the coast where coffee mee</textPath>
+        <div class="relative w-full max-w-2xl h-64 mb-16 flex items-center justify-center">
+          <!-- Wavy text across the screen -->
+          <svg class="absolute w-full h-full inset-0 z-20 pointer-events-none" viewBox="0 0 400 200">
+            <path d="M -50 140 C 50 60, 150 60, 200 100 C 250 140, 350 140, 450 60" fill="transparent" id="wavy-curve"></path>
+            <text class="text-[10px] uppercase tracking-widest font-bold fill-cream">
+              <textPath href="#wavy-curve" startOffset="50%" text-anchor="middle">Where coffee meets the coast where coffee meets</textPath>
             </text>
           </svg>
           <!-- Logo in center -->
-          <div class="absolute inset-0 flex items-center justify-center">
-            <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="h-28 w-auto filter brightness-0 invert object-contain">
+          <div class="relative z-10 flex items-center justify-center">
+            <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="h-32 w-auto filter brightness-0 invert object-contain">
           </div>
         </div>
         <p class="scroll-animate opacity-0 translate-y-8 transition-all duration-700 ease-out text-xs uppercase tracking-widest font-bold animate-bounce">Keep scrolling for<br>the good stuff.
