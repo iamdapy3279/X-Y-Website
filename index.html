@@ -90,31 +90,37 @@
   </nav>
   <!-- END: Navigation -->
   <!-- BEGIN: Hero Section -->
-  <section
-    class="relative bg-terracotta text-cream min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-4"
-    data-purpose="hero-section">
-    <div class="relative z-20 flex flex-col items-center max-w-4xl w-full text-center mt-20">
-      <div class="relative w-64 h-64 mb-16">
-        <!-- Circular text placeholder -->
-        <svg class="absolute w-full h-full animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100">
-          <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" id="curve"></path>
-          <text class="text-[8px] uppercase tracking-widest font-bold fill-cream">
-            <textPath href="#curve">Where coffee meets the coast where coffee mee</textPath>
-          </text>
-        </svg>
-        <!-- Logo in center -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="h-28 w-auto filter brightness-0 invert object-contain">
+  <section id="hero-scroll-container" class="relative bg-terracotta h-[250vh]" data-purpose="hero-section">
+    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+      
+      <!-- Hero Content (Fades out on scroll) -->
+      <div id="hero-content" class="relative z-20 flex flex-col items-center max-w-4xl w-full text-center text-cream transition-opacity duration-300 transform -translate-y-16">
+        <div class="relative w-64 h-64 mb-16">
+          <!-- Circular text placeholder -->
+          <svg class="absolute w-full h-full animate-[spin_20s_linear_infinite]" viewBox="0 0 100 100">
+            <path d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" id="curve"></path>
+            <text class="text-[8px] uppercase tracking-widest font-bold fill-cream">
+              <textPath href="#curve">Where coffee meets the coast where coffee mee</textPath>
+            </text>
+          </svg>
+          <!-- Logo in center -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <img src="assets/logos/Final logo without background_edited.png" alt="X&Y Logo" class="h-28 w-auto filter brightness-0 invert object-contain">
+          </div>
         </div>
+        <p class="scroll-animate opacity-0 translate-y-8 transition-all duration-700 ease-out text-xs uppercase tracking-widest font-bold animate-bounce">Keep scrolling for<br>the good stuff.
+        </p>
       </div>
-      <p class="scroll-animate opacity-0 translate-y-8 transition-all duration-700 ease-out text-xs uppercase tracking-widest font-bold mb-12 animate-bounce">Keep scrolling for<br>the good stuff.
-      </p>
-      <div class="scroll-animate opacity-0 translate-y-8 transition-all duration-700 ease-out delay-200 relative w-full aspect-[16/9] md:aspect-[21/9] bg-gray-900 overflow-hidden shadow-2xl rounded-2xl border-4 border-white/10">
+
+      <!-- The Expanding Video Card -->
+      <div id="hero-video-card" class="absolute inset-0 w-full h-full z-10 will-change-transform" 
+           style="--clip-t: 65%; --clip-b: 5%; --clip-x: 10%; --radius: 24px; clip-path: inset(var(--clip-t) var(--clip-x) var(--clip-b) var(--clip-x) round var(--radius));">
         <video autoplay muted loop playsinline class="w-full h-full object-cover">
           <source src="assets/videos/Dsktop2.mp4" type="video/mp4">
           Your browser does not support HTML5 video.
         </video>
       </div>
+
     </div>
   </section>
   <!-- END: Hero Section -->
@@ -434,6 +440,59 @@
         updateDish(currentDishIndex);
       });
     });
+
+    // Scroll-driven expanding card animation
+    const heroScrollContainer = document.getElementById('hero-scroll-container');
+    const heroVideoCard = document.getElementById('hero-video-card');
+    const heroContent = document.getElementById('hero-content');
+
+    if (heroScrollContainer && heroVideoCard && heroContent) {
+      let ticking = false;
+
+      // Initial values matching inline styles
+      const startClipT = 65;
+      const startClipB = 5;
+      const startClipX = 10;
+      const startRadius = 24;
+
+      const updateScrollAnimation = () => {
+        const rect = heroScrollContainer.getBoundingClientRect();
+        const maxScroll = rect.height - window.innerHeight;
+        
+        // Calculate raw progress
+        let progress = -rect.top / maxScroll;
+        progress = Math.max(0, Math.min(1, progress));
+
+        // Use progress to calculate current clip values
+        const currentClipT = startClipT - (startClipT * progress);
+        const currentClipB = startClipB - (startClipB * progress);
+        const currentClipX = startClipX - (startClipX * progress);
+        const currentRadius = startRadius - (startRadius * progress);
+
+        // Apply to CSS variables
+        heroVideoCard.style.setProperty('--clip-t', `${currentClipT}%`);
+        heroVideoCard.style.setProperty('--clip-b', `${currentClipB}%`);
+        heroVideoCard.style.setProperty('--clip-x', `${currentClipX}%`);
+        heroVideoCard.style.setProperty('--radius', `${currentRadius}px`);
+
+        // Fade out content text smoothly (fades out fully by 40% progress)
+        const contentOpacity = Math.max(0, 1 - (progress * 2.5));
+        heroContent.style.opacity = contentOpacity;
+        heroContent.style.transform = `translateY(${progress * -50}px)`;
+
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateScrollAnimation);
+          ticking = true;
+        }
+      }, { passive: true });
+      
+      // Initialize state
+      updateScrollAnimation();
+    }
 
     // Intersection Observer for scroll animations
     const observerOptions = {
