@@ -1,0 +1,13 @@
+{
+  "name": "x-and-y-website",
+  "version": "1.0.0",
+  "description": "X&Y Bakehouse & Bistro Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve -l 3000 .",
+    "dev": "npx -y serve -l 3000 ."
+  },
+  "keywords": ["bakehouse", "bistro", "kolkata"],
+  "author": "X&Y",
+  "license": "ISC"
+}
