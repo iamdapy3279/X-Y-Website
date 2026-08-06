@@ -142,29 +142,31 @@
   <section class="bg-[#F8F5EF] py-24 px-8" data-purpose="features">
     <div class="max-w-6xl mx-auto space-y-32">
       <!-- Feature 1 -->
-      <div class="flex flex-col md:flex-row items-center gap-16">
+      <!-- Feature 1 : Interactive Signature Dishes Carousel -->
+      <div class="flex flex-col md:flex-row items-center gap-16" id="dishes-carousel-section">
         <div class="flex-1 w-full relative">
-          <div
-            class="relative w-[80%] aspect-square md:aspect-[4/5] bg-gray-200 mx-auto transform -rotate-3 z-10 border-4 border-white shadow-lg">
-            <img alt="Green Latte and Croissant" class="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbRCGsovh8zuSv15kNUpcDNl7Nm3bg89cwxCEQgY2TJ_J_YqjMzkIrMUl3w3WGPAczOl7okcVgyG8EbQV-7rNueGhmOnECxKtkwd3ixgZYHZLyxDEQbHNEY-rIxZqRo2nbIV_cLaqB8gICZvUA9StjnlgrISIVxTG2TY-rhpU8ncVS21UjpKOjIyYXjR0azQX1kcztlqkUXSVMos0FQcx0F-7ZGOY9TKPt9gwICsJTAXTcBbIE_mNp">
+          <div class="relative w-[80%] aspect-square md:aspect-[4/5] bg-gray-200 mx-auto transform -rotate-3 z-10 border-4 border-white shadow-lg rounded-xl overflow-hidden">
+            <img id="dish-carousel-img" alt="Signature Dish" class="w-full h-full object-cover transition-opacity duration-300 ease-in-out"
+              src="assets/images/WhatsApp Image 2026-07-30 at 19.13.18.jpeg">
           </div>
-          <div
-            class="absolute inset-0 w-[80%] aspect-square md:aspect-[4/5] bg-terracotta/20 mx-auto transform rotate-2 z-0 border-4 border-white">
-          </div>
+          <div class="absolute inset-0 w-[80%] aspect-square md:aspect-[4/5] bg-terracotta/20 mx-auto transform rotate-2 z-0 border-4 border-white rounded-xl"></div>
           <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-            <button
-              class="w-8 h-8 rounded-full bg-cream border border-terracotta text-terracotta flex items-center justify-center hover:bg-terracotta hover:text-cream transition-colors shadow-sm">←</button>
-            <button
-              class="w-8 h-8 rounded-full bg-cream border border-terracotta text-terracotta flex items-center justify-center hover:bg-terracotta hover:text-cream transition-colors shadow-sm">→</button>
+            <button id="dish-prev-btn" aria-label="Previous Dish"
+              class="w-10 h-10 rounded-full bg-cream border-2 border-terracotta text-terracotta flex items-center justify-center hover:bg-terracotta hover:text-cream transition-colors shadow-md text-base font-bold">←</button>
+            <button id="dish-next-btn" aria-label="Next Dish"
+              class="w-10 h-10 rounded-full bg-cream border-2 border-terracotta text-terracotta flex items-center justify-center hover:bg-terracotta hover:text-cream transition-colors shadow-md text-base font-bold">→</button>
           </div>
         </div>
-        <div class="flex-1 text-center md:text-left">
-          <div class="w-36 h-36 mx-auto md:mx-0 mb-6">
+        <div class="flex-1 text-center md:text-left flex flex-col items-center md:items-start">
+          <div class="w-32 h-32 mb-4">
             <img src="assets/logos/Poodle 3.svg" alt="Illustration" class="w-full h-full object-contain">
           </div>
-          <p class="font-serif font-bold text-lg md:text-xl max-w-sm">Set on Honeysuckle Drive with views onto Hunter
-            River, Monte welcomes guests from morning through to late afternoon.</p>
+          
+          <div id="dish-info-container" class="transition-opacity duration-300 ease-in-out text-center md:text-left max-w-md">
+            <span class="text-xs uppercase tracking-widest font-bold text-terracotta/70 block mb-1">Signature Dish</span>
+            <h3 id="dish-title" class="font-serif font-bold text-2xl md:text-3xl text-terracotta mb-3">EGGS BENEDICT</h3>
+            <p id="dish-desc" class="font-serif font-bold text-lg md:text-xl text-darkBrown leading-relaxed">Poached eggs. Hollandaise. English muffin.</p>
+          </div>
         </div>
       </div>
       <!-- Feature 2 : Interactive Outlets Carousel -->
@@ -379,14 +381,61 @@
         }, 220);
       }
 
-      document.getElementById('outlet-prev-btn')?.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + outlets.length) % outlets.length;
-        updateOutlet(currentIndex);
+      // Signature Dishes Carousel
+      const dishes = [
+        {
+          name: 'EGGS BENEDICT',
+          desc: 'Poached eggs. Hollandaise. English muffin.',
+          image: 'assets/images/WhatsApp Image 2026-07-30 at 19.13.18.jpeg'
+        },
+        {
+          name: 'BURNT CHILLI OIL SPAGHETTI',
+          desc: 'Handcrafted spaghetti. Chilli Oil. Parmesan.',
+          image: 'assets/images/Flat Plate 7_-2.png'
+        },
+        {
+          name: 'NEW YORK CHEESECAKE',
+          desc: 'Cream Cheese. Graham Base. Vanilla.',
+          image: 'assets/images/WhatsApp Image 2026-07-30 at 19.12.31.jpeg'
+        },
+        {
+          name: 'BUTTER CROISSANT',
+          desc: 'Butter. Flour. Salt.',
+          image: 'assets/images/Lightbox 2.png'
+        }
+      ];
+
+      let currentDishIndex = 0;
+      const dishImgEl = document.getElementById('dish-carousel-img');
+      const dishContainerEl = document.getElementById('dish-info-container');
+      const dishTitleEl = document.getElementById('dish-title');
+      const dishDescEl = document.getElementById('dish-desc');
+
+      function updateDish(index) {
+        if (!dishImgEl || !dishContainerEl) return;
+
+        dishImgEl.style.opacity = '0';
+        dishContainerEl.style.opacity = '0';
+
+        setTimeout(() => {
+          const item = dishes[index];
+          dishTitleEl.textContent = item.name;
+          dishDescEl.textContent = item.desc;
+          dishImgEl.src = item.image;
+
+          dishImgEl.style.opacity = '1';
+          dishContainerEl.style.opacity = '1';
+        }, 220);
+      }
+
+      document.getElementById('dish-prev-btn')?.addEventListener('click', () => {
+        currentDishIndex = (currentDishIndex - 1 + dishes.length) % dishes.length;
+        updateDish(currentDishIndex);
       });
 
-      document.getElementById('outlet-next-btn')?.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % outlets.length;
-        updateOutlet(currentIndex);
+      document.getElementById('dish-next-btn')?.addEventListener('click', () => {
+        currentDishIndex = (currentDishIndex + 1) % dishes.length;
+        updateDish(currentDishIndex);
       });
     });
   </script>
